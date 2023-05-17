@@ -14,13 +14,12 @@ class splashscrren extends StatefulWidget {
 class _splashscrrenState extends State<splashscrren> {
   void changeScreen() {
     Timer.periodic(const Duration(milliseconds: 50), (timer) {
-      setState(() {
-      });
+      setState(() {});
     });
 
     Timer.periodic(
       const Duration(seconds: 3),
-          (tick) {
+      (tick) {
         Navigator.of(context).pushReplacementNamed(MyRoutes.homepage);
         tick.cancel();
       },
@@ -32,6 +31,7 @@ class _splashscrrenState extends State<splashscrren> {
     super.initState();
     changeScreen();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +43,9 @@ class _splashscrrenState extends State<splashscrren> {
                 const Spacer(
                   flex: 3,
                 ),
-                Image.asset("assets/images/amazon.png",fit: BoxFit.cover,
+                Image.asset(
+                  "assets/images/RM LOGO.jpg",
+                  fit: BoxFit.cover,
                 ),
                 const Spacer(),
                 const Spacer(),
