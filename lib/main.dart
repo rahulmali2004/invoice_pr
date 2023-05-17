@@ -1,3 +1,5 @@
+import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:invoice_pr/modals/product_modals.dart';
 import 'package:invoice_pr/utils/product.dart';
@@ -29,6 +31,13 @@ class _MyAppState extends State<MyApp> {
   bool isDark = false;
   String filter = "";
   List<Product?> filterproduct = [];
+  CarouselController buttonCarouselController = CarouselController();
+  final List<String> carouseimage = [
+    "https://static.vecteezy.com/system/resources/previews/001/950/076/original/online-shopping-concept-smartphone-online-store-free-vector.jpg",
+    "https://www.chic.ae/wp-content/uploads/Top-5-Online-Shopping-Website-in-Dubai-UAE-2022-1.jpg",
+    "https://indian-retailer.s3.ap-south-1.amazonaws.com/s3fs-public/2022-07/parcel-paper-cartons-with-shopping-cart-logo-trolley-laptop-keyboard-min.jpg",
+    "https://bmkltsly13vb.compat.objectstorage.ap-mumbai-1.oraclecloud.com/cdn.dailymirror.lk/assets/uploads/image_efc2441e66.jpg",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +102,27 @@ class _MyAppState extends State<MyApp> {
                   ),
                   body: Column(
                     children: [
+                      CarouselSlider(
+                        options: CarouselOptions(),
+                        items: carouseimage
+                            .map((item) => Container(
+                                  child: Center(
+                                      child: Image.network(item,
+                                          fit: BoxFit.cover, width: 1000)),
+                                ))
+                            .toList(),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                          child: Text(
+                        "category",
+                        textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                      )),
                       Expanded(
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
@@ -119,16 +149,25 @@ class _MyAppState extends State<MyApp> {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       Expanded(
                         flex: 13,
                         child: (filter.isEmpty)
                             ? GridView.builder(
                                 gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                 ),
-                                itemCount: products.length,
-                                itemBuilder: (context, index) => Container(
+                                itemCount: product.length,
+                                itemBuilder: (context, index) =>
+                                    GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushNamed(
+                                        MyRoutes.ProductDetailPage,
+                                        arguments: index);
+                                  },
                                   child: Column(
                                     children: [
                                       Container(
@@ -142,46 +181,43 @@ class _MyAppState extends State<MyApp> {
                                         ),
                                       ),
                                       Text(product[index].category),
+                                      Text("${product[index]!.price}"),
+                                      // Text("${product[index]!.brand}"),
                                     ],
                                   ),
                                 ),
                               )
                             : GridView(
                                 gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                 ),
                                 children: List.generate(filterproduct.length,
                                     (index) {
                                   if (filterproduct[index]!.category ==
-                                      category) {
-                                    return Container(
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            height: 140,
-                                            width: 170,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: NetworkImage(
-                                                      filterproduct[index]!
-                                                          .thumbnail),
-                                                  fit: BoxFit.fill),
-                                            ),
+                                      filter) {
+                                    return Column(
+                                      children: [
+                                        Container(
+                                          height: 140,
+                                          width: 170,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    filterproduct[index]!
+                                                        .thumbnail),
+                                                fit: BoxFit.fill),
                                           ),
-                                          Text(filterproduct[index]!.category),
-                                        ],
-                                      ),
+                                        ),
+                                        Text(filterproduct[index]!.category),
+                                        Text("${product[index]!.price}"),
+                                        // Text("${product[index]!.brand}"),
+                                      ],
                                     );
                                   } else {
                                     return Container();
                                   }
                                 }),
-                                // children: allProduct.map((element) {
-                                //    else {
-                                //     return Container();
-                                //   }
-                                // }).toList(),
                               ),
                       ),
                     ],
