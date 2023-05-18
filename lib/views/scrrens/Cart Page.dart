@@ -96,7 +96,7 @@ class _CartPageState extends State<CartPage> {
                               icon: const Icon(Icons.remove_rounded),
                             ),
                             Text(
-                                "${addcart[index].price * addcart[index].quantity}"),
+                                "${addcart[index].quantity}"),
                             IconButton(
                               onPressed: () {
                                 setState(() {
