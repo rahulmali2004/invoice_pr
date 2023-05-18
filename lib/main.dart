@@ -67,10 +67,13 @@ class _MyAppState extends State<MyApp> {
                   appBar: AppBar(
                     actions: [
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(MyRoutes.FavouriteProductsPage);
+                          },
                           icon: Text(
                             "♡",
                             style: TextStyle(fontSize: 20),
+                            
                           )),
                       IconButton(
                         onPressed: () {
@@ -85,7 +88,9 @@ class _MyAppState extends State<MyApp> {
                       SizedBox(
                         width: 10,
                       ),
-                      Icon(Icons.shopping_cart),
+                      IconButton(onPressed: (){
+                        Navigator.of(context).pushNamed(MyRoutes.CartPage);
+                      }, icon: Icon(Icons.shopping_cart)),
                       SizedBox(
                         width: 10,
                       ),
@@ -222,7 +227,6 @@ class _MyAppState extends State<MyApp> {
                       ),
                     ],
                   ),
-                  backgroundColor: Colors.grey.shade200,
                 );
               },
             ),

@@ -28,6 +28,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               children: [
                 IconButton(
                   onPressed: () {
+                    favourite.add(product[index]);
                     Navigator.of(context).pushNamed(
                         MyRoutes.FavouriteProductsPage,
                         arguments: index);
@@ -112,6 +113,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       offset: const Offset(320, 10),
                       child: IconButton(
                         onPressed: () {
+                          favourite.add(product[index]);
                           Navigator.of(context)
                               .pushNamed(MyRoutes.FavouriteProductsPage, arguments: index);
                         },
@@ -147,7 +149,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         const Spacer(),
                         IconButton(
                           onPressed: () {
-                            addcartproduct.add(product[index]);
+                            favourite.add(product[index]);
                             Navigator.of(context)
                                 .pushNamed(MyRoutes.FavouriteProductsPage, arguments: index);
                           },
@@ -156,7 +158,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         ),
                         IconButton(
                           onPressed: () {
-                            addcartproduct.add(product[index]);
+                            addcart.add(product[index]);
                             Navigator.of(context).pushNamed(
                                 MyRoutes.CartPage,
                                 arguments: index);
@@ -181,6 +183,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
+            setState(() {
+              addcart .add(product[index]);
+            });
             Navigator.of(context)
                 .pushNamed(MyRoutes.CartPage, arguments: index);
           },

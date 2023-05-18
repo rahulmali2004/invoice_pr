@@ -6,6 +6,7 @@ class Product {
   final String thumbnail;
   final int price;
   final int id;
+   int quantity = 1;
 
   Product({
     required this.descprition,
@@ -15,6 +16,7 @@ class Product {
     required this.price,
     required this.id,
     required this.title,
+    this.quantity = 1 ,
   });
 
   factory Product.fromMap({required Map data}) {
@@ -26,5 +28,13 @@ class Product {
         price: data['price'],
         id: data['id'],
         title: data['title']);
+
   }
+}
+
+class Myvariable  {
+  static String? name;
+  static String? email;
+  static int? mobile_no;
+
 }
